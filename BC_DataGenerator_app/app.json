@@ -1,0 +1,30 @@
+{
+  "id": "eaa1994f-fb4c-4871-8492-b08d8d21f21b",
+  "name": "SBI - BC Data Generator",
+  "publisher": "Spare Brained Ideas AB",
+  "version": "1.0.0.0",
+  "brief": "",
+  "description": "",
+  "privacyStatement": "https://sparebrained.com/appsource/privacystatement",
+  "EULA": "https://sparebrained.com/appsource/eula",
+  "help": "https://sparebrained.com/support",
+  "url": "https://sparebrained.com/appsource/",
+  "logo": "",
+  "dependencies": [],
+  "screenshots": [],
+  "platform": "1.0.0.0",
+  "application": "23.0.0.0",
+  "idRanges": [
+    {
+      "from": 80800,
+      "to": 80900
+    }
+  ],
+  "resourceExposurePolicy": {
+    "allowDebugging": true,
+    "allowDownloadingSource": false,
+    "includeSourceInSymbolFile": false
+  },
+  "runtime": "12.0",
+  "features": [ "NoImplicitWith"]
+}

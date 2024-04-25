@@ -1,0 +1,63 @@
+{
+	"folders": [
+		{
+			"path": "./_shared"
+		},
+		{
+			"path": "./BC_DataGenerator_app",
+			"name": "Data Generator App"
+		}
+	],
+	"settings": {
+		"al.codeAnalyzers": [
+			"${CodeCop}",
+			"${PerTenantExtensionCop}",
+			"${UICop}"
+		],
+		"al.enableCodeAnalysis": true,
+		"al.packageCachePath": [
+			"../_shared/.alpackages"
+		],
+		"alOutline.codeCleanupActions": [
+		  "AddApplicationAreas",
+		  "AddDataClassifications",
+		  "AddMissingParentheses",
+		  "FixIdentifiersCase",
+		  "FixKeywordsCase",
+		  "RemoveRedundantAppAreas",
+		  "RemoveStrSubstNoFromError",
+		  "RemoveUnusedVariables",
+		  "SortTableFields",
+		  "SortProperties",
+		  "SortVariables",
+		  "RemoveBeginEnd",
+		  "RemoveStrSubstNoFromError"
+		],
+		"CRS.FileNamePattern": "<ObjectNameShort>.<ObjectTypeShortPascalCase>.al",
+		"CRS.FileNamePatternExtensions": "<ObjectNameShort>.<ObjectTypeShortPascalCase>.al",
+		"CRS.FileNamePatternPageCustomizations": "<ObjectNameShort>.<ObjectTypeShortPascalCase>.al",
+		"CRS.OnSaveAlFileAction": "Rename"
+	},
+	"launch": {
+		"version": "0.2.0",
+		"configurations": [
+			{
+				"name": "Local Docker: bcserver",
+				"request": "launch",
+				"type": "al",
+				"environmentType": "OnPrem",
+				"server": "http://bcserver",
+				"serverInstance": "BC",
+				"authentication": "UserPassword",
+				"startupObjectId": 80800,
+				"startupObjectType": "Page",
+				"breakOnError": "All",
+				"launchBrowser": false,
+				"enableLongRunningSqlStatements": true,
+				"enableSqlInformationDebugger": true,
+				"tenant": "default"
+			}
+		],		
+		"compounds": []
+	}
+}
