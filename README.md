@@ -18,3 +18,7 @@ Installer:
  - Financials, Sales, Purchasing, Inventory, Warehouse, Mfg, Service
 
 Run the routine to Export, we get a ZIP file of AL files that contain the codeunits
+
+## To do:
+- Filtering logic
+- Primary Key inclusion (forced)
