@@ -21,9 +21,9 @@ codeunit 80803 "SPB Has Transactions" implements "SPB Special Table Filtering"
 
     local procedure ApplyCustomerFiltering(var TargetRecordRef: RecordRef)
     var
+        CustLedgerEntry: Record "Cust. Ledger Entry";
         Customer: Record Customer;
         SalesHeader: Record "Sales Header";
-        CustLedgerEntry: Record "Cust. Ledger Entry";
     begin
         // more than two open sales documents or 10 transactions posted
         if TargetRecordRef.FindSet() then
@@ -37,8 +37,8 @@ codeunit 80803 "SPB Has Transactions" implements "SPB Special Table Filtering"
 
     local procedure ApplyVendorFiltering(var TargetRecordRef: RecordRef)
     var
-        Vendor: Record Vendor;
         PurchHeader: Record "Purchase Header";
+        Vendor: Record Vendor;
         VendLedgerEntry: Record "Vendor Ledger Entry";
     begin
         // more than two open purchase documents or 10 transactions posted

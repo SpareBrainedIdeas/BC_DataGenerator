@@ -1,11 +1,11 @@
 table 80800 "SPB DataGen Package"
 {
     Caption = 'DataGen Package';
-    DataClassification = ToBeClassified;
+    DataClassification = SystemMetadata;
 
     fields
     {
-        field(1; "Code"; Code[10])
+        field(1; Code; Code[10])
         {
             Caption = 'Code';
             DataClassification = SystemMetadata;
@@ -32,15 +32,15 @@ table 80800 "SPB DataGen Package"
         }
         field(1000; "Tables Included"; Integer)
         {
-            Caption = 'Tables Included';
-            FieldClass = FlowField;
             CalcFormula = count("SPB DataGen Pkg. Table" where("Package Code" = field(Code)));
+            Caption = 'Tables Included';
             Editable = false;
+            FieldClass = FlowField;
         }
     }
     keys
     {
-        key(PK; "Code")
+        key(PK; Code)
         {
             Clustered = true;
         }
@@ -51,6 +51,6 @@ table 80800 "SPB DataGen Package"
         SPBDataGenUtilities: Codeunit "SPB DataGen Utilities";
         CodeunitNameTok: Label '%1.Codeunit.al';
     begin
-        exit(StrSubstno(CodeunitNameTok, SPBDataGenUtilities.SafeName(Description)));
+        exit(StrSubstNo(CodeunitNameTok, SPBDataGenUtilities.SafeName(Description)));
     end;
 }

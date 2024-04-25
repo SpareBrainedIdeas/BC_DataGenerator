@@ -10,10 +10,10 @@ xmlport 80800 "SPB Datagen Imp/Exp Settings"
             tableelement(SPBDataGenPackage; "SPB DataGen Package")
             {
                 AutoReplace = true;
-                AutoUpdate = true;
                 AutoSave = true;
+                AutoUpdate = true;
 
-                fieldelement(Code; SPBDataGenPackage."Code")
+                fieldelement(Code; SPBDataGenPackage.Code)
                 {
                 }
                 fieldelement(Description; SPBDataGenPackage.Description)
@@ -25,8 +25,8 @@ xmlport 80800 "SPB Datagen Imp/Exp Settings"
                 tableelement(SPBDataGenPackageTable; "SPB DataGen Pkg. Table")
                 {
                     AutoReplace = true;
-                    AutoUpdate = true;
                     AutoSave = true;
+                    AutoUpdate = true;
 
                     fieldelement(PackageCode; SPBDataGenPackageTable."Package Code")
                     {
@@ -40,8 +40,8 @@ xmlport 80800 "SPB Datagen Imp/Exp Settings"
                     tableelement(SPBDataGenPackageField; "SPB DataGen Pkg. Field")
                     {
                         AutoReplace = true;
-                        AutoUpdate = true;
                         AutoSave = true;
+                        AutoUpdate = true;
 
                         fieldelement(PackageCode; SPBDataGenPackageField."Package Code")
                         {

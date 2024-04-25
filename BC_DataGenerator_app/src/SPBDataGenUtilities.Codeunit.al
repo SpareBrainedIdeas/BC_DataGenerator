@@ -1,7 +1,7 @@
 codeunit 80800 "SPB DataGen Utilities"
 {
-    SingleInstance = true;
     Access = Internal;
+    SingleInstance = true;
 
     procedure SafeName(InputText: Text) OutputText: Text
     var
@@ -9,7 +9,7 @@ codeunit 80800 "SPB DataGen Utilities"
     begin
         OutputText := ConvertDigitsToWords(InputText);
         preserveChars := 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
-        OutputText := DelChr(OutputText, '=', DELCHR(OutputText, '=', preserveChars));
+        OutputText := DelChr(OutputText, '=', DelChr(OutputText, '=', preserveChars));
     end;
 
     procedure ConvertDigitsToWords(InputText: Text) OutputText: Text;
@@ -44,7 +44,7 @@ codeunit 80800 "SPB DataGen Utilities"
 
     procedure ALSafeDateTime(InputDateTime: DateTime) OutputText: Text
     begin
-        if InputDatetime = 0DT then
+        if InputDateTime = 0DT then
             exit('0DT');
         OutputText := 'CreateDateTime(' + Format(InputDateTime, 0, '<Year4><Month,2><Day,2>') + 'D, ' + Format(InputDateTime, 0, '<Hours24,2><Minutes,2><Seconds,2>') + 'T)';
     end;
@@ -87,8 +87,8 @@ codeunit 80800 "SPB DataGen Utilities"
 
     procedure RandDecInDecimalRange("Min": Decimal; "Max": Decimal; Precision: Integer): Decimal
     var
-        Min2: Integer;
         Max2: Integer;
+        Min2: Integer;
         Pow: Integer;
     begin
         Pow := Power(10, Precision);
@@ -102,7 +102,7 @@ codeunit 80800 "SPB DataGen Utilities"
         // Returns a pseudo random integer in the interval [1,Range]
         if Range < 1 then
             exit(1);
-        exit(1 + Round(Uniform * (Range - 1), 1));
+        exit(1 + Round(Uniform() * (Range - 1), 1));
     end;
 
     procedure RandIntInRange("Min": Integer; "Max": Integer): Integer
@@ -113,8 +113,8 @@ codeunit 80800 "SPB DataGen Utilities"
     procedure RandDate(Delta: Integer): Date
     begin
         if Delta = 0 then
-            exit(WorkDate);
-        exit(CalcDate(StrSubstNo('<%1D>', Delta / Abs(Delta) * RandInt(Abs(Delta))), WorkDate));
+            exit(WorkDate());
+        exit(CalcDate(StrSubstNo('<%1D>', Delta / Abs(Delta) * RandInt(Abs(Delta))), WorkDate()));
     end;
 
     procedure RandDateFrom(FromDate: Date; Range: Integer): Date
@@ -162,7 +162,7 @@ codeunit 80800 "SPB DataGen Utilities"
     local procedure Uniform(): Decimal
     begin
         // Generates a pseudo random uniform number
-        UpdateSeed;
+        UpdateSeed();
 
         exit((Seed mod 137) / 137);
     end;
@@ -184,9 +184,9 @@ codeunit 80800 "SPB DataGen Utilities"
 
         repeat
             if FieldRef.Length < 10 then
-                FieldRef.SetRange(CopyStr(GenerateGUID, 10 - FieldRef.Length + 1)) // Cut characters on the left side.
+                FieldRef.SetRange(CopyStr(GenerateGUID(), 10 - FieldRef.Length + 1)) // Cut characters on the left side.
             else
-                FieldRef.SetRange(GenerateGUID);
+                FieldRef.SetRange(GenerateGUID());
         until RecRef.IsEmpty;
 
         exit(FieldRef.GetFilter)
@@ -220,7 +220,7 @@ codeunit 80800 "SPB DataGen Utilities"
         Clear(FieldRef);
         FieldRef := RecRef.Field(FieldNo);
         repeat
-            FieldRef.SetRange(PadStr(GenerateGUID, FieldRef.Length, '0'));
+            FieldRef.SetRange(PadStr(GenerateGUID(), FieldRef.Length, '0'));
         until RecRef.IsEmpty;
 
         exit(FieldRef.GetFilter);
@@ -280,8 +280,8 @@ codeunit 80800 "SPB DataGen Utilities"
     var
         ASCIICodeFrom: Integer;
         ASCIICodeTo: Integer;
-        Number: Integer;
         i: Integer;
+        Number: Integer;
     begin
         case Option of
             Option::Capitalized:
@@ -318,10 +318,10 @@ codeunit 80800 "SPB DataGen Utilities"
 
     procedure GenerateRandomPhoneNo(): Text[20]
     var
-        PlusSign: Text[1];
-        OpenBracket: Text[1];
         CloseBracket: Text[1];
         Delimiter: Text[1];
+        OpenBracket: Text[1];
+        PlusSign: Text[1];
     begin
         // +123 (456) 1234-1234
         // 123 456 12341234
@@ -344,8 +344,8 @@ codeunit 80800 "SPB DataGen Utilities"
 
     procedure GenerateRandomDate(MinDate: Date; MaxDate: Date): Date
     var
-        DateFormulaRandomDate: DateFormula;
         DateFormulaMinDate: DateFormula;
+        DateFormulaRandomDate: DateFormula;
     begin
         Evaluate(DateFormulaMinDate, '<-1D>');
         Evaluate(DateFormulaRandomDate, '<' + Format(RandInt(MaxDate - MinDate + 1)) + 'D>');

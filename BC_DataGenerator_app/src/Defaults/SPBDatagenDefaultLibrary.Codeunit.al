@@ -26,11 +26,11 @@ codeunit 80802 "SPB Datagen Default Library"
     local procedure CreatePackageCoreApp()
     begin
         MarkAllRealFields('CORE-BC', Database::"Standard Text");      // Table 7
-        MarkAllRealFields('CORE-BC', Database::"Language");      // Table 8
+        MarkAllRealFields('CORE-BC', Database::Language);      // Table 8
         MarkAllRealFields('CORE-BC', Database::"Country/Region");      // Table 9
         MarkAllRealFields('CORE-BC', Database::"Shipment Method");      // Table 10
         MarkAllRealFields('CORE-BC', Database::"Salesperson/Purchaser");      // Table 13
-        MarkAllRealFields('CORE-BC', Database::"Location");      // Table 14
+        MarkAllRealFields('CORE-BC', Database::Location);      // Table 14
         MarkAllRealFields('CORE-BC', Database::"Accounting Period");      // Table 50
         MarkAllRealFields('CORE-BC', Database::"Document Sending Profile");      // Table 60
         MarkAllRealFields('CORE-BC', Database::"Electronic Document Format");      // Table 61
@@ -41,12 +41,12 @@ codeunit 80802 "SPB Datagen Default Library"
         MarkAllRealFields('CORE-BC', Database::"Post Code");      // Table 225
         MarkAllRealFields('CORE-BC', Database::"Source Code");      // Table 230
         MarkAllRealFields('CORE-BC', Database::"Source Code Setup");      // Table 242
-        MarkAllRealFields('CORE-BC', Database::"Territory");      // Table 286
+        MarkAllRealFields('CORE-BC', Database::Territory);      // Table 286
         MarkAllRealFields('CORE-BC', Database::"Payment Method");      // Table 289
         MarkAllRealFields('CORE-BC', Database::"Shipping Agent");      // Table 291
         MarkAllRealFields('CORE-BC', Database::"No. Series");      // Table 308
         MarkAllRealFields('CORE-BC', Database::"No. Series Line");      // Table 309
-        MarkAllRealFields('CORE-BC', Database::"Dimension");      // Table 348
+        MarkAllRealFields('CORE-BC', Database::Dimension);      // Table 348
         MarkAllRealFields('CORE-BC', Database::"Dimension Value");      // Table 349
         MarkAllRealFields('CORE-BC', Database::"Default Dimension");      // Table 352
         MarkAllRealFields('CORE-BC', Database::"Dim. Value per Account");      // Table 356
@@ -67,7 +67,7 @@ codeunit 80802 "SPB Datagen Default Library"
     local procedure CreatePackageFinance()
     begin
         MarkAllRealFields('FINANCE', Database::"Payment Terms");      // Table 3
-        MarkAllRealFields('FINANCE', Database::"Currency");      // Table 4
+        MarkAllRealFields('FINANCE', Database::Currency);      // Table 4
         MarkAllRealFields('CORE-BC', Database::"Currency Exchange Rate");      // Table 330
         MarkAllRealFields('FINANCE', Database::"Finance Charge Terms");      // Table 5
         MarkAllRealFields('FINANCE', Database::"G/L Account");      // Table 15
@@ -111,7 +111,7 @@ codeunit 80802 "SPB Datagen Default Library"
 
     local procedure CreatePackageSales()
     begin
-        MarkAllRealFields('SALES', Database::"Customer");      // Table 18
+        MarkAllRealFields('SALES', Database::Customer);      // Table 18
         MarkAllRealFields('SALES', Database::"Customer Posting Group");      // Table 92
         MarkAllRealFields('SALES', Database::"Ship-to Address");      // Table 222
         MarkAllRealFields('SALES', Database::"Customer Bank Account");      // Table 287
@@ -123,7 +123,7 @@ codeunit 80802 "SPB Datagen Default Library"
 
     local procedure CreatePackagePurchases()
     begin
-        MarkAllRealFields('PURCHASE', Database::"Vendor");      // Table 23
+        MarkAllRealFields('PURCHASE', Database::Vendor);      // Table 23
         MarkAllRealFields('PURCHASE', Database::"Vendor Posting Group");      // Table 93
         MarkAllRealFields('PURCHASE', Database::"Req. Wksh. Template");      // Table 244
         MarkAllRealFields('PURCHASE', Database::"Requisition Wksh. Name");      // Table 245
@@ -134,7 +134,7 @@ codeunit 80802 "SPB Datagen Default Library"
 
     local procedure CreatePackageItems()
     begin
-        MarkAllRealFields('INVENTORY', Database::"Item");      // Table 27
+        MarkAllRealFields('INVENTORY', Database::Item);      // Table 27
         MarkAllRealFields('INVENTORY', Database::"Item Journal Template");      // Table 82
         MarkAllRealFields('INVENTORY', Database::"Inventory Posting Group");      // Table 94
         MarkAllRealFields('INVENTORY', Database::"Item Vendor");      // Table 99
@@ -144,8 +144,8 @@ codeunit 80802 "SPB Datagen Default Library"
         MarkAllRealFields('INVENTORY', Database::"Item Substitution");      // Table 5715
         MarkAllRealFields('INVENTORY', Database::"Nonstock Item");      // Table 5718
         MarkAllRealFields('INVENTORY', Database::"Nonstock Item Setup");      // Table 5719
-        MarkAllRealFields('INVENTORY', Database::"Manufacturer");      // Table 5720
-        MarkAllRealFields('INVENTORY', Database::"Purchasing");      // Table 5721
+        MarkAllRealFields('INVENTORY', Database::Manufacturer);      // Table 5720
+        MarkAllRealFields('INVENTORY', Database::Purchasing);      // Table 5721
         MarkAllRealFields('INVENTORY', Database::"Item Category");      // Table 5722
         MarkAllRealFields('INVENTORY', Database::"Transfer Route");      // Table 5742
         MarkAllRealFields('INVENTORY', Database::"Item Reference");      // Table 5777
@@ -171,35 +171,35 @@ codeunit 80802 "SPB Datagen Default Library"
     local procedure CreatePackageCRM()
     begin
         MarkAllRealFields('CRM', Database::"Customer Templ.");      // Table 1381
-        MarkAllRealFields('CRM', Database::"Contact");      // Table 5050
+        MarkAllRealFields('CRM', Database::Contact);      // Table 5050
         MarkAllRealFields('CRM', Database::"Business Relation");      // Table 5053
         MarkAllRealFields('CRM', Database::"Contact Business Relation");      // Table 5054
         MarkAllRealFields('CRM', Database::"Mailing Group");      // Table 5055
         MarkAllRealFields('CRM', Database::"Industry Group");      // Table 5057
         MarkAllRealFields('CRM', Database::"Web Source");      // Table 5059
-        MarkAllRealFields('CRM', Database::"Attachment");      // Table 5062
+        MarkAllRealFields('CRM', Database::Attachment);      // Table 5062
         MarkAllRealFields('CRM', Database::"Interaction Group");      // Table 5063
         MarkAllRealFields('CRM', Database::"Interaction Template");      // Table 5064
         MarkAllRealFields('CRM', Database::"Job Responsibility");      // Table 5066
         MarkAllRealFields('CRM', Database::"Contact Job Responsibility");      // Table 5067
-        MarkAllRealFields('CRM', Database::"Salutation");      // Table 5068
+        MarkAllRealFields('CRM', Database::Salutation);      // Table 5068
         MarkAllRealFields('CRM', Database::"Salutation Formula");      // Table 5069
         MarkAllRealFields('CRM', Database::"Organizational Level");      // Table 5070
-        MarkAllRealFields('CRM', Database::"Campaign");      // Table 5071
+        MarkAllRealFields('CRM', Database::Campaign);      // Table 5071
         MarkAllRealFields('CRM', Database::"Campaign Status");      // Table 5073
         MarkAllRealFields('CRM', Database::"Segment Header");      // Table 5076
         MarkAllRealFields('CRM', Database::"Segment Line");      // Table 5077
         MarkAllRealFields('CRM', Database::"Marketing Setup");      // Table 5079
-        MarkAllRealFields('CRM', Database::"Activity");      // Table 5081
+        MarkAllRealFields('CRM', Database::Activity);      // Table 5081
         MarkAllRealFields('CRM', Database::"Activity Step");      // Table 5082
-        MarkAllRealFields('CRM', Database::"Team");      // Table 5083
+        MarkAllRealFields('CRM', Database::Team);      // Table 5083
         MarkAllRealFields('CRM', Database::"Contact Duplicate");      // Table 5085
         MarkAllRealFields('CRM', Database::"Cont. Duplicate Search String");      // Table 5086
         MarkAllRealFields('CRM', Database::"Profile Questionnaire Header");      // Table 5087
         MarkAllRealFields('CRM', Database::"Profile Questionnaire Line");      // Table 5088
         MarkAllRealFields('CRM', Database::"Sales Cycle");      // Table 5090
         MarkAllRealFields('CRM', Database::"Sales Cycle Stage");      // Table 5091
-        MarkAllRealFields('CRM', Database::"Opportunity");      // Table 5092
+        MarkAllRealFields('CRM', Database::Opportunity);      // Table 5092
         MarkAllRealFields('CRM', Database::"Opportunity Entry");      // Table 5093
         MarkAllRealFields('CRM', Database::"Close Opportunity Code");      // Table 5094
         MarkAllRealFields('CRM', Database::"Duplicate Search String Setup");      // Table 5095
@@ -220,8 +220,8 @@ codeunit 80802 "SPB Datagen Default Library"
 
     local procedure CreatePackageResourcesJobs()
     begin
-        MarkAllRealFields('JOBS', Database::"Resource");      // Table 156
-        MarkAllRealFields('JOBS', Database::"Job");      // Table 167
+        MarkAllRealFields('JOBS', Database::Resource);      // Table 156
+        MarkAllRealFields('JOBS', Database::Job);      // Table 167
         MarkAllRealFields('JOBS', Database::"Resource Unit of Measure");      // Table 205
         MarkAllRealFields('JOBS', Database::"Job Posting Group");      // Table 208
         MarkAllRealFields('JOBS', Database::"Job Journal Template");      // Table 209
@@ -241,12 +241,11 @@ codeunit 80802 "SPB Datagen Default Library"
     end;
 
 
-    local procedure MarkAllRealFields(PackageCode: code[10]; TableId: Integer)
+    local procedure MarkAllRealFields(PackageCode: Code[10]; TableId: Integer)
     var
-        Fields: Record Field;
         SPBDataGenPackage: Record "SPB DataGen Package";
-        SPBDataGenPkgTable: Record "SPB DataGen Pkg. Table";
         SPBDataGenPkgField: Record "SPB DataGen Pkg. Field";
+        SPBDataGenPkgTable: Record "SPB DataGen Pkg. Table";
         TargetRecordRef: RecordRef;
         TargetFieldRef: FieldRef;
         i: Integer;
@@ -257,7 +256,7 @@ codeunit 80802 "SPB Datagen Default Library"
             SPBDataGenPackage.Description := PackageCode;
             SPBDataGenPackage.Insert(true);
         end;
-        if not SPBDataGenPkgTable.get(PackageCode, TableId) then begin
+        if not SPBDataGenPkgTable.Get(PackageCode, TableId) then begin
             SPBDataGenPkgTable.Init();
             SPBDataGenPkgTable."Package Code" := PackageCode;
             SPBDataGenPkgTable.Validate("Table Id", TableId);
@@ -270,7 +269,7 @@ codeunit 80802 "SPB Datagen Default Library"
         for i := 1 to TargetRecordRef.FieldCount do begin
             // if they're a non-flowfield
             TargetFieldRef := TargetRecordRef.FieldIndex(i);
-            if (TargetFieldRef.Class = FieldClass::Normal) and IsSupportedType(TargetFieldRef) then begin
+            if (TargetFieldRef.Class = FieldClass::Normal) and IsSupportedType(TargetFieldRef) then
                 // Add them
                 if SPBDataGenPkgField.Get(PackageCode, TableId, TargetFieldRef.Number) then begin
                     SPBDataGenPkgField.Include := true;
@@ -279,7 +278,6 @@ codeunit 80802 "SPB Datagen Default Library"
 
                     SPBDataGenPkgField.Modify(true);
                 end;
-            end;
         end;
     end;
 
@@ -292,7 +290,7 @@ codeunit 80802 "SPB Datagen Default Library"
 
     local procedure IsDefaultAnon(FieldName: Text): Boolean
     begin
-        exit(Uppercase(FieldName) in ['NAME', 'SEARCH NAME', 'NAME 2', 'FIRST NAME', 'MIDDLE NAME', 'LAST NAME', 'INITIALS',
+        exit(UpperCase(FieldName) in ['NAME', 'SEARCH NAME', 'NAME 2', 'FIRST NAME', 'MIDDLE NAME', 'LAST NAME', 'INITIALS',
         'ADDRESS', 'ADDRESS 2', 'CONTACT', 'CONTACT NAME', 'OUR ACCOUNT NO.', 'VAT REGISTRATION NO.',
         'PHONE NO.', 'PHONE', 'E-MAIL', 'E-MAIL ADDRESS', 'FAX NO.', 'TELEX NO.', 'GLN', 'EORI NUMBER', 'HOME PAGE', 'MOBILE PHONE NO.',
         'BANK ACCOUNT NO.', 'ACCOUNT NO.', 'SOCIAL SECURITY NO.', 'EMPLOYMENT DATE'])

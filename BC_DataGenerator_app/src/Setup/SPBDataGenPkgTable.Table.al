@@ -1,7 +1,7 @@
 table 80801 "SPB DataGen Pkg. Table"
 {
     Caption = 'DataGen Pkg. Table';
-    DataClassification = ToBeClassified;
+    DataClassification = SystemMetadata;
 
     fields
     {
@@ -20,12 +20,12 @@ table 80801 "SPB DataGen Pkg. Table"
 
         field(20; "Maximum Records"; Integer)
         {
+            BlankZero = true;
             Caption = 'Maximum Records';
             DataClassification = SystemMetadata;
-            BlankZero = true;
         }
 
-        field(100; "Apply Codeunit Filtering"; enum "SPB Special Filtering Options")
+        field(100; "Apply Codeunit Filtering"; Enum "SPB Special Filtering Options")
         {
             Caption = 'Apply Codeunit Filtering';
             DataClassification = SystemMetadata;
@@ -43,24 +43,24 @@ table 80801 "SPB DataGen Pkg. Table"
 
         field(1000; "Table Name"; Text[30])
         {
+            CalcFormula = lookup(AllObjWithCaption."Object Name" where("Object Type" = const(Table), "Object ID" = field("Table Id")));
             Caption = 'Table Name';
             FieldClass = FlowField;
-            CalcFormula = lookup(AllObjWithCaption."Object Name" where("Object Type" = const(table), "Object ID" = field("Table Id")));
         }
 
         field(1001; "Included Field Count"; Integer)
         {
-            FieldClass = FlowField;
-            Editable = false;
-            Caption = 'Included Field Count';
             CalcFormula = count("SPB DataGen Pkg. Field" where("Package Code" = field("Package Code"), "Table Id" = field("Table Id"), Include = const(true)));
+            Caption = 'Included Field Count';
+            Editable = false;
+            FieldClass = FlowField;
         }
         field(1002; "Total Field Count"; Integer)
         {
-            FieldClass = FlowField;
-            Editable = false;
-            Caption = 'Field Count';
             CalcFormula = count("SPB DataGen Pkg. Field" where("Package Code" = field("Package Code"), "Table Id" = field("Table Id")));
+            Caption = 'Field Count';
+            Editable = false;
+            FieldClass = FlowField;
         }
     }
     keys

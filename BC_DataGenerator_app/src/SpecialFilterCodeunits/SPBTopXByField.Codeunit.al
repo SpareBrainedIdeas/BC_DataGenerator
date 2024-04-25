@@ -19,10 +19,10 @@ codeunit 80805 "SPB Top X By Field" implements "SPB Special Table Filtering"
 
     local procedure ApplyItemFiltering(var PackageTable: Record "SPB DataGen Pkg. Table"; var TargetRecordRef: RecordRef)
     var
-        TempSortBuffer: Record "SPB Filter Results Buffer" temporary;
-        TargetFieldRef: FieldRef;
         Item: Record Item;
         ItemLedgerEntry: Record "Item Ledger Entry";
+        TempSortBuffer: Record "SPB Filter Results Buffer" temporary;
+        TargetFieldRef: FieldRef;
         LastGroupCode: Code[200];
         i: Integer;
     begin

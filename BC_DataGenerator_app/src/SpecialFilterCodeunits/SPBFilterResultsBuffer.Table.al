@@ -1,7 +1,7 @@
 table 80803 "SPB Filter Results Buffer"
 {
     Caption = 'SPB Filter Results Buffer';
-    DataClassification = ToBeClassified;
+    DataClassification = SystemMetadata;
     TableType = Temporary;
 
     fields

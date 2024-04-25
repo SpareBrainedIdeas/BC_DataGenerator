@@ -6,17 +6,17 @@ codeunit 80801 "SPB DataGen Generator"
     TableNo = "SPB DataGen Package";
 
     var
-        Window: Dialog;
-        ProgressTok: Label 'DataGen Generation\---\Table:  #1#################\Status: #2#################\---\Start Time: #3#############\Duration:   #4#############';
         ProcessStartTime: DateTime;
         ProgressLastUpdate: DateTime;
+        Window: Dialog;
+        ProgressTok: Label 'DataGen Generation\---\Table:  #1#################\Status: #2#################\---\Start Time: #3#############\Duration:   #4#############';
 
     trigger OnRun()
     var
         DataCompression: Codeunit "Data Compression";
         TempBlob: Codeunit "Temp Blob";
-        OutS: OutStream;
         InS: InStream;
+        OutS: OutStream;
         ZipFileName: Text;
     begin
         ProcessStartTime := CurrentDateTime;
@@ -50,12 +50,11 @@ codeunit 80801 "SPB DataGen Generator"
     procedure CreateCodeunit(var DataGenPackage: Record "SPB DataGen Package"): Text
     var
         PackageTable: Record "SPB DataGen Pkg. Table";
-        DataGenUtility: Codeunit "SPB DataGen Utilities";
         CodeunitBuilder: TextBuilder;
     begin
         UpdateStatusWindow('CreateCodeunit-' + DataGenPackage.Description, 'Baking Create Functions', false);
 
-        PackageTable.SetRange("Package Code", DataGenPackage."Code");
+        PackageTable.SetRange("Package Code", DataGenPackage.Code);
         if not PackageTable.FindSet() then
             exit;
 
@@ -75,11 +74,11 @@ codeunit 80801 "SPB DataGen Generator"
     local procedure GetCodunitHeader(var DataGenPackage: Record "SPB DataGen Package"): Text
     var
         DataGenUtility: Codeunit "SPB DataGen Utilities";
-        CodeunitBuilder: TextBuilder;
         CodeUnitName: Text;
+        CodeunitBuilder: TextBuilder;
     begin
         CodeUnitName := DataGenUtility.SafeName(DataGenPackage.Description);
-        CodeunitBuilder.AppendLine('codeunit ' + Format(DataGenPackage."Codeunit No.") + ' ' + CodeunitName);
+        CodeunitBuilder.AppendLine('codeunit ' + Format(DataGenPackage."Codeunit No.") + ' ' + CodeUnitName);
         CodeunitBuilder.AppendLine('{');
         CodeunitBuilder.Append(GetPermissionText(DataGenPackage));
         CodeunitBuilder.AppendLine('');
@@ -110,13 +109,11 @@ codeunit 80801 "SPB DataGen Generator"
         PackageField: Record "SPB DataGen Pkg. Field";
         PackageField2: Record "SPB DataGen Pkg. Field";
         DataGenUtility: Codeunit "SPB DataGen Utilities";
-        CreateFunctionsBuilder: TextBuilder;
+        LastFieldNo: Integer;
+        Parameter: Text;
         ProcedureName: Text;
         TableName: Text;
-        FieldName: Text;
-        Parameter: Text;
-        CodeunitBuilderCopy: Text;
-        LastFieldNo: Integer;
+        CreateFunctionsBuilder: TextBuilder;
     begin
         PackageField.SetRange("Package Code", PackageTable."Package Code");
         PackageField.SetRange("Table Id", PackageTable."Table Id");
@@ -169,14 +166,14 @@ codeunit 80801 "SPB DataGen Generator"
     local procedure GetCreateCollection(var DataGenPackage: Record "SPB DataGen Package"): Text
     var
         PackageTable: Record "SPB DataGen Pkg. Table";
-        CreateCollectionBuilder: TextBuilder;
-        TableName: Text;
-        ProcedureName: Text;
         DataGenUtilities: Codeunit "SPB DataGen Utilities";
+        ProcedureName: Text;
+        TableName: Text;
+        CreateCollectionBuilder: TextBuilder;
     begin
         UpdateStatusWindow('CreateCodeunit-' + DataGenPackage.Description, 'Rolling out the data', false);
 
-        PackageTable.SetRange("Package Code", DataGenPackage."Code");
+        PackageTable.SetRange("Package Code", DataGenPackage.Code);
         if not PackageTable.FindSet() then
             exit;
 
@@ -203,10 +200,10 @@ codeunit 80801 "SPB DataGen Generator"
         SPBDataGenUtilities: Codeunit "SPB DataGen Utilities";
         TargetRecordRef: RecordRef;
         TargetFieldRef: FieldRef;
-        CreateCollectionLineBuilder: TextBuilder;
+        TestDate: Date;
         LastFieldNo: Integer;
         RunningRecordCount: Integer;
-        TestDate: Date;
+        CreateCollectionLineBuilder: TextBuilder;
     begin
         PackageFields.SetRange("Package Code", PackageTable."Package Code");
         PackageFields.SetRange("Table Id", PackageTable."Table Id");
@@ -226,10 +223,9 @@ codeunit 80801 "SPB DataGen Generator"
             until PackageFields.Next() = 0;
         PackageFields.SetRange(Filter);
 
-        if PackageTable."Apply Codeunit Filtering" <> Enum::"SPB Special Filtering Options"::" " then begin
+        if PackageTable."Apply Codeunit Filtering" <> Enum::"SPB Special Filtering Options"::" " then
             // This often relies heavily on MARKED records, FYI
             ApplySpecialFiltering(PackageTable, TargetRecordRef);
-        end;
 
         // For each record in the table (that matches filters!)
         Clear(RunningRecordCount);
@@ -246,13 +242,13 @@ codeunit 80801 "SPB DataGen Generator"
                                 if not PackageFields.Anonymize then
                                     case TargetFieldRef.Type of
                                         FieldType::Code, FieldType::Text:
-                                            CreateCollectionLineBuilder.Append(StrSubstNo('''%1''', CONVERTSTR(Format(TargetFieldRef.Value), '''', '"')));
+                                            CreateCollectionLineBuilder.Append(StrSubstNo('''%1''', ConvertStr(Format(TargetFieldRef.Value), '''', '"')));
                                         FieldType::Date:
                                             CreateCollectionLineBuilder.Append(SPBDataGenUtilities.ALSafeDate(TargetFieldRef.Value));
                                         FieldType::Time:
                                             CreateCollectionLineBuilder.Append(SPBDataGenUtilities.ALSafeTime(TargetFieldRef.Value));
                                         FieldType::DateTime:
-                                            CreateCollectionLineBuilder.Append(SPBDataGenUtilities.ALSafeDatetime(TargetFieldRef.Value));
+                                            CreateCollectionLineBuilder.Append(SPBDataGenUtilities.ALSafeDateTime(TargetFieldRef.Value));
                                         FieldType::Guid:
                                             CreateCollectionLineBuilder.Append(SPBDataGenUtilities.ALSafeGuid(TargetFieldRef.Value));
                                         FieldType::DateFormula:
@@ -282,7 +278,7 @@ codeunit 80801 "SPB DataGen Generator"
                                         FieldType::Time:
                                             CreateCollectionLineBuilder.Append(SPBDataGenUtilities.ALSafeTime(TargetFieldRef.Value));
                                         FieldType::DateTime:
-                                            CreateCollectionLineBuilder.Append(SPBDataGenUtilities.ALSafeDatetime(TargetFieldRef.Value));
+                                            CreateCollectionLineBuilder.Append(SPBDataGenUtilities.ALSafeDateTime(TargetFieldRef.Value));
                                         FieldType::Guid:
                                             CreateCollectionLineBuilder.Append(SPBDataGenUtilities.ALSafeGuid(TargetFieldRef.Value));
                                         FieldType::DateFormula:
@@ -317,10 +313,10 @@ codeunit 80801 "SPB DataGen Generator"
     local procedure GetPermissionText(var DataGenPackage: Record "SPB DataGen Package"): Text
     var
         DataGenPackageTables: Record "SPB DataGen Pkg. Table";
-        PermissionList: TextBuilder;
+        LastTableNo: Integer;
         PermissionLineTok: Label '        tabledata "%1" = rim';
         EndOfString: Text;
-        LastTableNo: Integer;
+        PermissionList: TextBuilder;
     begin
         PermissionList.Append('    Permissions = ');
         DataGenPackageTables.SetRange("Package Code", DataGenPackage.Code);
@@ -359,7 +355,7 @@ codeunit 80801 "SPB DataGen Generator"
             Window.Update(1, NewStage);
             Window.Update(2, NewStatus);
             Window.Update(3, ProcessStartTime);
-            Window.update(4, Format(CurrentDateTime - ProcessStartTime));
+            Window.Update(4, Format(CurrentDateTime - ProcessStartTime));
             ProgressLastUpdate := CurrentDateTime;
         end;
     end;

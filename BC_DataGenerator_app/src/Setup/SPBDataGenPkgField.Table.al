@@ -1,7 +1,7 @@
 table 80802 "SPB DataGen Pkg. Field"
 {
     Caption = 'DataGen Pkg. Field';
-    DataClassification = ToBeClassified;
+    DataClassification = SystemMetadata;
 
     fields
     {
@@ -26,7 +26,6 @@ table 80802 "SPB DataGen Pkg. Field"
         field(11; Include; Boolean)
         {
             Caption = 'Include';
-            DataClassification = ToBeClassified;
 
             trigger OnValidate()
             begin
@@ -37,7 +36,6 @@ table 80802 "SPB DataGen Pkg. Field"
         field(12; Anonymize; Boolean)
         {
             Caption = 'Anonymize';
-            DataClassification = ToBeClassified;
         }
         field(20; "Processing Order"; Integer)
         {
@@ -61,9 +59,9 @@ table 80802 "SPB DataGen Pkg. Field"
         }
         field(1001; "Field Name"; Text[250])
         {
+            CalcFormula = lookup(Field.FieldName where(TableNo = field("Table Id"), "No." = field("Field No.")));
             Caption = 'Field Name';
             FieldClass = FlowField;
-            CalcFormula = lookup(Field.FieldName where(TableNo = field("Table Id"), "No." = field("Field No.")));
         }
     }
     keys
@@ -152,8 +150,8 @@ table 80802 "SPB DataGen Pkg. Field"
 
     local procedure TryCheckForRelations()
     var
-        Fields: Record Field;
         AllObjWithCaptions: Record AllObjWithCaption;
+        Fields: Record Field;
         SPBDataGenPkgTable: Record "SPB DataGen Pkg. Table";
         AddMissingRelatedTableQst: Label 'Add the %1 table (related to Field %2) to the DataGen Package?';
     begin
@@ -163,7 +161,7 @@ table 80802 "SPB DataGen Pkg. Field"
         Fields.SetRange(TableNo, Rec."Table Id");
         Fields.SetRange("No.", Rec."Field No.");
         if Fields.FindFirst() and (Fields.RelationTableNo <> 0) then begin
-            SPBDataGenPkgTable.SetRange("Package Code", rec."Package Code");
+            SPBDataGenPkgTable.SetRange("Package Code", Rec."Package Code");
             SPBDataGenPkgTable.SetRange("Table Id", Fields.RelationTableNo);
             if SPBDataGenPkgTable.IsEmpty then begin
                 AllObjWithCaptions.SetRange("Object Type", AllObjWithCaptions."Object Type"::Table);
