@@ -1,0 +1,30 @@
+# Never store app files in the repository
+*.app
+
+# Symbols
+.alpackages/
+# Cache
+.alcache/
+# snapshots
+.snapshots/
+# extension templates
+.altemplates
+
+# AL Test runner related files
+.altestrunner
+# Testing Output folder
+.output/
+# Test results file
+TestResults.xml
+
+# Rapid Application Development File
+rad.json
+
+# Translation Base-file (it's autoregen'd on compile)
+*.g.xlf
+
+# License-file (Juuuuust in case)
+*.flf
+
+# Launch Config is too user/environ specific
+launch.json
